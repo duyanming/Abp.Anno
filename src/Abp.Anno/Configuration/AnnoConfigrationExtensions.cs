@@ -9,7 +9,8 @@ namespace Abp.Anno.Configuration
     {
         public static IAnnoConfiguration Anno(this IModuleConfigurations configurations)
         {
-            return configurations.AbpConfiguration.Get<IAnnoConfiguration>();
+            return configurations.AbpConfiguration.GetOrCreate("AnnoConfigration",
+                ()=> configurations.AbpConfiguration.IocManager.Resolve<IAnnoConfiguration>());
         }
     }
 }
